@@ -1,0 +1,443 @@
+<!-- 
+   Elapsed time: 0 seconds.
+--><!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="_ctl0__ctl0_Head1"><title>
+	International Migration Database
+</title>
+<script src="js/jquery/jquery-1.6.2.min.js" type="text/javascript"></script>
+<script src="js/jqueryui/jquery-ui-1.8.14.min.js" type="text/javascript"></script>
+<script src="js/jqueryui/jquery.ui.widget.js" type="text/javascript"></script>
+<script src="js/jqueryui/jquery.ui.menu.js" type="text/javascript"></script>
+<script src="js/jqueryui/jquery.ui.menubar.js" type="text/javascript"></script>
+<script src="js/jqueryplugin/jquery.ellipsis.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+        function trackExitAndRedir(url, label) {
+            try {
+                pageTracker._trackPageview("/Other/Exit/" + label);
+                pageTracker._trackEvent('Exit', 'Click on external link', url);
+            }
+            catch (ex) { }
+            document.location.href = url;
+        }
+
+        function PanelSearch() {
+            var txtsearchvalue = $('.txtSearch').attr("value");
+            if (txtsearchvalue.length <= 150) {
+                if (dotStatSearchProviderType == 'IndependentExternalSearchProvider') {
+                    var searchURL = dotStatSearchURL.replace(/\{0}/g, txtsearchvalue);
+                    window.open(searchURL);
+                }
+                else {
+                    subSessionId = $('input[id*="TBSubSessionId"]').val();
+                    CallServer("Search&" + txtsearchvalue + "&" + subSessionId);
+                }
+            }
+        }
+
+        function HandleKeyPressSearch(e) {
+            if (window.event && window.event.keyCode == 13) {
+                PanelSearch();
+                return false;
+            }
+            else if (e.keyCode == 13) {
+                PanelSearch();
+                return false;
+            }
+        }
+    </script>
+<style id="_ctl0__ctl0_head_ViewSpecificCss" type="text/css">
+        body
+        {
+            overflow: auto;
+        }
+    </style>
+<script language="text/javascript" type="text/javascript">
+    var modalpivotdimensionstitle = "Customise layout";var modaloptionstitle = "Customise table options";var modalexporttitle = "Export";var modalsavetitle = "Save";var modalreadymadefilestitle = "Ready-made files";var findinbrowsetheme = "Find in Themes";var gettingstartedtitle = "Getting Started";var modalEditXmlDefinition = "Edit XML Definition";var modalSurvey = "Survey";var exceptionOccurredInExport = "Exception occurred in Export.";var urlmetadata = "OECDStat_Metadata/ShowMetadata.ashx";var urlmicrodata = "http://stats.oecd.org/Microdata/";
+</script><link href="Content/themes/OECD/styles/dialog.css" rel="stylesheet" type="text/css"/><link href="Content/themes/OECD/styles/layout.css" rel="stylesheet" type="text/css"/><link href="Content/themes/OECD/styles/metadata.css" rel="stylesheet" type="text/css"/><link href="Content/themes/OECD/styles/pages.css" rel="stylesheet" type="text/css"/><link href="Content/themes/OECD/styles/treeview.css" rel="stylesheet" type="text/css"/><link href="Content/themes/OECD/styles/WebTableStyles.css" rel="stylesheet" type="text/css"/><link href="Content/themes/OECD/styles/jqueryui/1-jquery-ui-1.8.14.custom.css" rel="stylesheet" type="text/css"/><link href="Content/themes/OECD/styles/jqueryui/2-jquery.ui.menu.css" rel="stylesheet" type="text/css"/><link href="Content/themes/OECD/styles/jqueryui/3-jquery.ui.menubar.css" rel="stylesheet" type="text/css"/><link href="Content/themes/OECD/styles/jqueryui/4-jquery.ui.selectmenu.css" rel="stylesheet" type="text/css"/><link href="Content/themes/OECD/styles/dialog.css" rel="stylesheet" type="text/css"/><link href="Content/themes/OECD/styles/layout.css" rel="stylesheet" type="text/css"/><link href="Content/themes/OECD/styles/metadata.css" rel="stylesheet" type="text/css"/><link href="Content/themes/OECD/styles/pages.css" rel="stylesheet" type="text/css"/><link href="Content/themes/OECD/styles/treeview.css" rel="stylesheet" type="text/css"/><link href="Content/themes/OECD/styles/WebTableStyles.css" rel="stylesheet" type="text/css"/><link href="Content/themes/OECD/styles/jqueryui/1-jquery-ui-1.8.14.custom.css" rel="stylesheet" type="text/css"/><link href="Content/themes/OECD/styles/jqueryui/2-jquery.ui.menu.css" rel="stylesheet" type="text/css"/><link href="Content/themes/OECD/styles/jqueryui/3-jquery.ui.menubar.css" rel="stylesheet" type="text/css"/><link href="Content/themes/OECD/styles/jqueryui/4-jquery.ui.selectmenu.css" rel="stylesheet" type="text/css"/><meta content="OECD.Stat enables users to search for and extract data from across OECD’s many databases." name="description"/><meta content="OECD, statistics, data, download, access" name="keywords"/><meta content="OECD" name="author"/><meta content="© OECD" name="copyright"/><meta content="Global" name="distribution"/></head>
+<body>
+<form action="viewhtml.aspx?datasetcode=MIG&amp;lang=en" id="aspnetForm" method="post" name="aspnetForm">
+<input id="__VIEWSTATE" name="__VIEWSTATE" type="hidden" value="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"/>
+<script type="text/javascript">
+<!--
+ function CallServer(arg,context) { 
+                    centerwidth = 0;
+                    centerwidth = getCenterWidth();
+                    $('#divcontent').hide();
+                    $('#contentLoading').width(centerwidth);        
+                    $('#contentLoading').show();WebForm_DoCallback('__Page',arg,ReceiveServerData,context,OnCallbackError,false); }// -->
+</script>
+<input id="__VIEWSTATEGENERATOR" name="__VIEWSTATEGENERATOR" type="hidden" value="0F968173"/>
+<input id="__EVENTVALIDATION" name="__EVENTVALIDATION" type="hidden" value="wW251N/e40ak8aFFYM8KfLaNRqyz+JZk/gyVE1vo+o4fMUxnueEi2y/SwSmSGxZ9sxTtklQeiGPoE62W2+Pp6mY3O/yeoRG5gqhQE3Nk/anLWjdVPWmC5+zphgZqqZvIJCXFnpfIe+3pNBdEGxUVCZGC3ew/ADkQU3UXXT2yzqPmW7OScrfH8EWwyiga7eQYFT+KrYi1awMrmGh+8C7/9GKZdObMqMQAHI9KYTbeX7g0Zpwc++T/uy8aWGjwzNjAHLmjD++audTDkK5wPWmNNGobNRk4tZXEW9bF3PcvJsktTCflTqA8dPWJ+hf+czezRzbgPuaTWHVrMwV/jfUZLbug5OeZgIqIpoIjzHKOQYOCkF09CHnmKkok9beosDy5sxvXmEM5JZbvfazuyG7wV23nVaBlkKM18iDHnVlFro9h80no"/>
+<script type="text/javascript">var currentlanguage = 'en';var organization = 'OECD';var bquerymanagertree = true;var dotStatSearchURL = 'http://stats.oecd.org/OECDStatWS_SearchService/SearchService.asmx';var dotStatSearchProviderType = 'IntegratedSearch';</script>
+<div id="container">
+<div class="header" id="_ctl0__ctl0_divHeader">
+<div class="left" id="wboslogo">
+<a href="Index.aspx" id="_ctl0__ctl0_hrefOverLogo">
+</a>
+<img align="absmiddle" border="0" id="_ctl0__ctl0_ImageMapLogo" src="Content/themes/OECD/images/logo/externalLogo-en.gif" usemap="#ImageMap_ctl0__ctl0_ImageMapLogo"/><map id="ImageMap_ctl0__ctl0_ImageMapLogo" name="ImageMap_ctl0__ctl0_ImageMapLogo">
+<area alt="" coords="626,53,186,67" href="" shape="rect" target="_parent" title=""></area><area alt="" coords="0,0,626,67" href="javascript:trackExitAndRedir('http://www.oecd.org', 'OECD Web Site');" shape="rect" target="_parent" title=""></area>
+</map>
+</div>
+<div id="topright">
+</div>
+<div id="topright">
+<div class="toplink" id="_ctl0__ctl0_cphHeader_divTopLink">
+<a href="javascript:login();" id="_ctl0__ctl0_cphHeader_LoginTopLink" title="">Click here to Login | </a>
+<a id="_ctl0__ctl0_cphHeader_ContactTopLink" onclick="javascript:OpenDialog('FAQAndContact.aspx?', 'Contact us');" title="Contact us">
+                Contact us | </a>
+<a href="/Content/themes/OECD/static/help/WBOS User Guide (EN).PDF" id="_ctl0__ctl0_cphHeader_UserGuideTopLink" target="_blank" title="User Guide">
+                User Guide | </a>
+</div>
+<div class="languagelink" id="_ctl0__ctl0_cphHeader_languageSelector"><span class="currentlanguagelink">English</span> | <a href="javascript:setLanguage( 'fr' );">Français</a></div>
+</div>
+</div>
+<div class="topline" id="_ctl0__ctl0_divTopLine"></div>
+<div id="content">
+<input id="_ctl0__ctl0_cphCentre_ContentPlaceHolder1_TBSubSessionId" name="_ctl0:_ctl0:cphCentre:ContentPlaceHolder1:TBSubSessionId" type="hidden" value="56b66736-5f4e-47ce-927c-d0ed4e9f2157"/>
+<input id="_ctl0__ctl0_cphCentre_ContentPlaceHolder1_hiddenDatasetCode" name="_ctl0:_ctl0:cphCentre:ContentPlaceHolder1:hiddenDatasetCode" type="hidden"/>
+<input id="_ctl0__ctl0_cphCentre_ContentPlaceHolder1_hiddenCurrentQueryWasUpdated" name="_ctl0:_ctl0:cphCentre:ContentPlaceHolder1:hiddenCurrentQueryWasUpdated" type="hidden"/>
+<input id="_ctl0__ctl0_cphCentre_ContentPlaceHolder1_hiddenQueryId" name="_ctl0:_ctl0:cphCentre:ContentPlaceHolder1:hiddenQueryId" type="hidden"/>
+<input id="_ctl0__ctl0_cphCentre_ContentPlaceHolder1_hiddenQueryType" name="_ctl0:_ctl0:cphCentre:ContentPlaceHolder1:hiddenQueryType" type="hidden"/>
+<input id="_ctl0__ctl0_cphCentre_ContentPlaceHolder1_hiddenUserClickedViewInPivot" name="_ctl0:_ctl0:cphCentre:ContentPlaceHolder1:hiddenUserClickedViewInPivot" type="hidden"/>
+<input id="_ctl0__ctl0_cphCentre_ContentPlaceHolder1_hiddenUserClickedDownloadFiles" name="_ctl0:_ctl0:cphCentre:ContentPlaceHolder1:hiddenUserClickedDownloadFiles" type="hidden"/>
+<input id="_ctl0__ctl0_cphCentre_ContentPlaceHolder1_hiddenRefreshOnly" name="_ctl0:_ctl0:cphCentre:ContentPlaceHolder1:hiddenRefreshOnly" type="hidden"/>
+<input id="_ctl0__ctl0_cphCentre_ContentPlaceHolder1_hiddenOpenViewHTML" name="_ctl0:_ctl0:cphCentre:ContentPlaceHolder1:hiddenOpenViewHTML" type="hidden"/>
+<link href="./Styles/WebTableStyles.css" rel="stylesheet" type="text/css"/>
+<div id="divErrorMessageForCallback" style="position: relative; display:none">
+<h2 style="color:#999999">This dataset preview is momentarily unavailable.</h2> <p style="color:#999999">Please try again or select another dataset.</p>
+</div>
+<div id="divcontent">
+<input id="_ctl0__ctl0_cphCentre_ContentPlaceHolder1__ctl1_hiddenSort" name="_ctl0:_ctl0:cphCentre:ContentPlaceHolder1:_ctl1:hiddenSort" type="hidden" value="NOSORT"/>
+<input id="_ctl0__ctl0_cphCentre_ContentPlaceHolder1__ctl1_hiddenPageNumber" name="_ctl0:_ctl0:cphCentre:ContentPlaceHolder1:_ctl1:hiddenPageNumber" type="hidden" value="1"/>
+<input id="_ctl0__ctl0_cphCentre_ContentPlaceHolder1__ctl1_hiddenCurrentLanguage" name="_ctl0:_ctl0:cphCentre:ContentPlaceHolder1:_ctl1:hiddenCurrentLanguage" type="hidden"/>
+<input id="_ctl0__ctl0_cphCentre_ContentPlaceHolder1__ctl1_hiddenPDim_Trigger" name="_ctl0:_ctl0:cphCentre:ContentPlaceHolder1:_ctl1:hiddenPDim_Trigger" type="hidden" value="false"/>
+<input id="_ctl0__ctl0_cphCentre_ContentPlaceHolder1__ctl1_hiddenPDim_DimCode" name="_ctl0:_ctl0:cphCentre:ContentPlaceHolder1:_ctl1:hiddenPDim_DimCode" type="hidden"/>
+<input id="_ctl0__ctl0_cphCentre_ContentPlaceHolder1__ctl1_hiddenPDim_MemberCode" name="_ctl0:_ctl0:cphCentre:ContentPlaceHolder1:_ctl1:hiddenPDim_MemberCode" type="hidden"/>
+<input id="_ctl0__ctl0_cphCentre_ContentPlaceHolder1__ctl1_hiddenIsMQ" name="_ctl0:_ctl0:cphCentre:ContentPlaceHolder1:_ctl1:hiddenIsMQ" type="hidden"/>
+<script type="text/javascript">var ohiddenSort = document.getElementById('_ctl0__ctl0_cphCentre_ContentPlaceHolder1__ctl1_hiddenSort');var ohiddenPageNumber = document.getElementById('_ctl0__ctl0_cphCentre_ContentPlaceHolder1__ctl1_hiddenPageNumber');var ohiddenPDim_Trigger = document.getElementById('_ctl0__ctl0_cphCentre_ContentPlaceHolder1__ctl1_hiddenPDim_Trigger');var ohiddenPDim_DimCode = document.getElementById('_ctl0__ctl0_cphCentre_ContentPlaceHolder1__ctl1_hiddenPDim_DimCode');var ohiddenPDim_MemberCode = document.getElementById('_ctl0__ctl0_cphCentre_ContentPlaceHolder1__ctl1_hiddenPDim_MemberCode');var ohiddenIsMQ = document.getElementById('_ctl0__ctl0_cphCentre_ContentPlaceHolder1__ctl1_hiddenIsMQ');mergequery = document.getElementById('_ctl0__ctl0_cphCentre_ContentPlaceHolder1__ctl1_MergeQuery');</script>
+<script src="js/ajax.js" type="text/javascript"></script>
+<script src="Scripts/Data.js?v2" type="text/javascript"></script>
+<script type="text/javascript">
+    var showSurvey = 'False';
+
+    function redirectToSurvey(exporttype) {
+        redirectToSurvey(exporttype, '');
+    }
+    
+    function redirectToSurvey(exporttype, firstDataPointIndexPerPage) {
+        //alert(showSurvey);
+        if (showSurvey == 'True') {
+            showSurvey = false;  // we don't show the survey twice on the same page without page reload
+            dotstatExportSurvey(exporttype, firstDataPointIndexPerPage, true);
+        } else {
+            dotstatExport(exporttype, firstDataPointIndexPerPage, true);            
+        }
+    }
+</script>
+<div id="contentcenter">
+<div class="divQuery" id="_ctl0__ctl0_cphCentre_ContentPlaceHolder1__ctl1_divQuery">
+<p class="compomenttitle" id="_ctl0__ctl0_cphCentre_ContentPlaceHolder1__ctl1_pCompomentTitle">
+</p>
+<h2 class="querytitle" id="_ctl0__ctl0_cphCentre_ContentPlaceHolder1__ctl1_querytitle">
+<span class="dtitle">
+                International Migration Database
+                
+                
+            </span><span class="qtitle">
+</span>
+</h2>
+<div id="_ctl0__ctl0_cphCentre_ContentPlaceHolder1__ctl1_divMenuBar">
+<div class="clearfix" id="menubar">
+<ul class="menubar-icons" id="menubar-list">
+<li id="menubar-customize"><a href="#"><span class="top-menubar-icon" id="customize-icon"> </span><span style="float: left;">Customise</span></a>
+<ul class="menubar-sublist" id="customize-menu">
+<li id="menuitemDataSelection"><a href="#"><span class="ui-button-icon-primary ui-icon" id="data-selection-icon">
+</span>
+                                Selection…</a>
+<ul id="dimension-list">
+<li><a href="#" onclick="OpenDialog( './ModalDimWebTree.aspx?DimensionCode=CO2', 'Customise selection');"><span class="ui-button-icon-primary ui-icon ui-icon-arrowstop-1-e"></span>Country of birth/nationality [210 / 214]</a></li><li><a href="#" onclick="OpenDialog( './ModalDimWebTree.aspx?DimensionCode=VAR', 'Customise selection');"><span class="ui-button-icon-primary ui-icon ui-icon-arrowstop-1-e"></span>Variable [10 / 11]</a></li><li><a href="#" onclick="OpenDialog( './ModalDimWebTree.aspx?DimensionCode=GEN', 'Customise selection');"><span class="ui-button-icon-primary ui-icon ui-icon-arrowstop-1-e"></span>Gender [1 / 2]</a></li><li><a href="#" onclick="OpenDialog( './ModalDimWebTree.aspx?DimensionCode=COU', 'Customise selection');"><span class="ui-button-icon-primary ui-icon ui-icon-arrowstop-1-e"></span>Country [34 / 34]</a></li><li><a href="#" onclick="OpenDialog( './ModalTimeDimension.aspx?DimensionCode=YEA', 'Customise selection');"><span class="ui-button-icon-primary ui-icon ui-icon-arrowstop-1-e"></span>Year [14]</a></li>
+</ul>
+</li>
+<li id="menuitemLayout"><a id="_ctl0__ctl0_cphCentre_ContentPlaceHolder1__ctl1_PivotDimensions" onclick="OpenThisQuery('Options');"><span class="ui-button-icon-primary ui-icon" id="pivot-dimensions-icon"></span>
+                                Layout</a></li>
+<li id="menuitemTableOption"><a id="_ctl0__ctl0_cphCentre_ContentPlaceHolder1__ctl1_Options" onclick="OpenThisQuery('Options2');"><span class="ui-button-icon-primary ui-icon" id="options-icon"></span>
+                                Table options</a></li>
+</ul>
+</li>
+<li id="menubar-export"><a href="#"><span class="top-menubar-icon" id="export-icon"> </span><span style="display: block; float: left;">Export</span></a>
+<ul class="menubar-sublist">
+<li id="menuitemExportExcel">
+<a id="_ctl0__ctl0_cphCentre_ContentPlaceHolder1__ctl1_ExportExcel" onclick="redirectToSurvey('excel', '');">
+<span class="ui-button-icon-primary ui-icon" id="export-excel-icon"></span>
+                                    Excel
+                                </a>
+</li>
+<li id="menuitemExportCSV">
+<a id="_ctl0__ctl0_cphCentre_ContentPlaceHolder1__ctl1_ExportCSV" onclick="redirectToSurvey('csv');">
+<span class="ui-button-icon-primary ui-icon" id="export-csv-icon"></span>
+                                    Text file (CSV)
+                                </a>
+</li>
+<li id="menuitemExportPCAxis">
+<a id="_ctl0__ctl0_cphCentre_ContentPlaceHolder1__ctl1_ExportPCAxis" onclick="redirectToSurvey('pcaxis');">
+<span class="ui-button-icon-primary ui-icon" id="export-pc-axis-icon"></span>
+                                    PC-axis
+                                </a>
+</li>
+<li id="menuitemExportSDMX">
+<a id="_ctl0__ctl0_cphCentre_ContentPlaceHolder1__ctl1_ExportSDMX" onclick="redirectToSurvey('sdmx');">
+<span class="ui-button-icon-primary ui-icon" id="export-sdmx-icon"></span>
+                                    SDMX (XML)
+                                </a>
+</li>
+<li id="menuitemExportReadymadeFiles">
+<a class="" id="_ctl0__ctl0_cphCentre_ContentPlaceHolder1__ctl1_ExportReadyMadeFiles" onclick="exportreadymadefiles_clientclick();">
+<span class="ui-button-icon-primary ui-icon" id="Span1"></span>
+                                    Related files
+                                </a>
+</li>
+</ul>
+</li>
+<li id="menubar-chart"><a class="" href="Controls/#charts" id="_ctl0__ctl0_cphCentre_ContentPlaceHolder1__ctl1_Charts"><span class="top-menubar-icon" id="chart-icon"> </span><span style="float: left;">Draw chart</span></a>
+<ul class="menubar-sublist" id="_ctl0__ctl0_cphCentre_ContentPlaceHolder1__ctl1_ChartsSubmenu">
+<li id="menuitemChartBar"><a class="" id="_ctl0__ctl0_cphCentre_ContentPlaceHolder1__ctl1_ChartBar" onclick="displayChart('BarChart');"><span class="ui-button-icon-primary ui-icon" id="chart-bar-icon"></span>
+                                Bar</a></li>
+<li id="menuitemChartLine"><a class="" id="_ctl0__ctl0_cphCentre_ContentPlaceHolder1__ctl1_ChartLine" onclick="displayChart('TimeGraph');"><span class="ui-button-icon-primary ui-icon" id="chart-line-icon"></span>
+                                Line</a></li>
+<li id="menuitemChartPlot"><a class="" id="_ctl0__ctl0_cphCentre_ContentPlaceHolder1__ctl1_ChartPlot" onclick="displayChart('ScatterPlot');"><span class="ui-button-icon-primary ui-icon" id="chart-plot-icon"></span>
+                                Scatter Plot</a></li>
+</ul>
+</li>
+<li id="menubar-queries"><a href="Controls/#yoursel" id="_ctl0__ctl0_cphCentre_ContentPlaceHolder1__ctl1_QueryManagement"><span class="top-menubar-icon" id="my-queries-icon"> </span><span style="float: left;">My Queries</span></a>
+<ul class="menubar-sublist" id="_ctl0__ctl0_cphCentre_ContentPlaceHolder1__ctl1_QueryManagementSubmenu">
+<li id="menuitemSaveQuery"><a id="_ctl0__ctl0_cphCentre_ContentPlaceHolder1__ctl1_SaveQuery" onclick="alert('Please log in first to use this functionality.');"><span class="ui-button-icon-primary ui-icon" id="save-query-icon"></span>
+                                Save
+                            </a></li>
+<li id="menuitemMergeQuery" style="display: none"><a class="ui-state-disabled" id="_ctl0__ctl0_cphCentre_ContentPlaceHolder1__ctl1_MergeQuery"><span class="ui-button-icon-primary ui-icon" id="merged-queries-icon"></span>
+                                Combine
+                            </a></li>
+<li id="menuitemManageQuery"><a id="_ctl0__ctl0_cphCentre_ContentPlaceHolder1__ctl1_QueryManager" onclick="alert('Please log in first to use this functionality.');">
+<span class="ui-button-icon-primary ui-icon" id="query-manager-icon"></span>
+                                Manage</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<script type="text/javascript">
+
+        function popup(page) {
+            var left;
+            var top;
+            top = ((screen.height - 420) / 2);
+            left = ((screen.width - 650) / 2);
+            var owindow = window.open(page, "popup", "toolbar=false,scrollbars=false,width=650,height=420,left=" + left + ",top=" + top + "");
+            owindow.focus();
+            if (!$.browser.msie) {
+                e.stopPropagation();
+            }
+            else {
+                window.event.cancelBubble = true;
+            }
+            return false;
+        }
+
+        $(".menubar-icons").menubar({
+            autoExpand: true,
+            menuIcon: true,
+            buttons: true
+        });
+
+        var queryid = '';
+        var datasetcode = '';
+        var mergequery;
+
+        datasetcode = 'MIG';queryid = 17761; 
+	       
+        function exportreadymadefiles_clientclick()
+        {
+            if (typeof modalreadymadefilestitle != 'undefined') {
+                OpenDialog("./DownloadFiles.aspx?HideTopMenu=yes&DatasetCode=" + datasetcode, modalreadymadefilestitle, 'auto');
+            }
+            else {
+                OpenDialog( "./DownloadFiles.aspx?HideTopMenu=yes&DatasetCode=" + datasetcode, "Related files", 'auto');
+            }
+        }
+
+    </script>
+<div id="querymessage">
+<div id="_ctl0__ctl0_cphCentre_ContentPlaceHolder1__ctl1_MessageOrWarning">
+<span id="_ctl0__ctl0_cphCentre_ContentPlaceHolder1__ctl1_lblWarning"></span>
+</div>
+</div>
+<div class="outpoutcontainer" id="_ctl0__ctl0_cphCentre_ContentPlaceHolder1__ctl1_OutpoutContainer"><webtable xmlns=""><input extracted="2015-10-31T03:20:48" id="tablevalues" type="hidden" value="0,107148,,,1,127877,,,2,119080,,,3,123411,,,4,146441,,,5,161734,,,6,176205,,,7,189490,,,8,203874,,,9,222572,,,10,206714,,,11,210704,,,12,242385,,,13,251850,,,14,65954,,,15,74786,,,16,86144,,,17,93341,,,18,104246,,,19,97995,,,20,82899,,,21,91546,,,22,94368,,,23,91660,,,24,96896,,,25,109921,,,26,125605,,,27,135228,,,28,57295,,,29,65974,,,30,70230,,,31,68800,,,32,72446,,,33,77411,,,34,83433,,,35,93387,,,36,106012,,,37,102714,,,38,113582,e,,39,117948,,,40,109995,,,41,105519,,,42,227455,,,43,250640,,,44,228919,,,45,221203,,,46,235643,,,47,262067,,,48,251467,,,49,236620,,,50,247065,,,51,251911,,,52,280230,,,53,248335,,,54,257445,,,55,258480,,,56,18741,,,57,28924,,,58,29942,,,59,29835,,,60,32099,,,61,38149,,,62,48516,,,63,79377,,,64,68380,,,65,57059,,,66,63920,,,67,76337,,,68,105088,,,69,132140,,,70,4227,,,71,11323,,,72,43648,,,73,57438,,,74,50804,,,75,58576,,,76,66125,,,77,102511,,,78,77817,,,79,39973,,,80,30515,,,81,22590,,,82,30298,,,83,29579,,,84,22766,,,85,24642,,,86,21485,,,87,18385,,,88,18706,,,89,20146,,,90,23979,,,91,31430,,,92,37018,,,93,31957,,,94,33442,,,95,34572,,,96,35490,,,97,41342,,,102,759,,,103,981,,,104,1488,,,105,1952,,,106,1929,,,107,2229,,,108,1199,,,109,1675,,,110,1107,,,111,1633,,,112,9110,,,113,11037,,,114,9972,,,115,9432,,,116,11511,,,117,12744,,,118,13868,,,119,17504,,,120,19906,,,121,18087,,,122,18212,,,123,20416,,,124,23334,,,125,23873,,,126,91875,,,127,106877,,,128,124232,,,129,136370,,,130,141554,,,131,135866,,,132,159391,,,133,145876,,,134,153331,,,135,159607,,,136,157759,,,137,154803,,,138,163446,,,139,171925,,,140,648846,,,141,685259,,,142,658341,,,143,601759,,,144,602182,,,145,579301,,,146,558467,,,147,574752,,,148,573815,,,149,606314,,,150,683529,,,151,841695,,,152,965908,,,153,1108068,,,159,65318,,,160,63216,,,161,46333,,,162,42901,,,163,46534,,,164,33368,,,165,23206,,,166,17732,,,168,20184,,,169,20308,,,170,17972,,,171,19365,,,172,22164,,,173,25582,,,174,23569,,,175,22607,,,176,35547,,,177,25582,,,178,23884,,,179,22514,,,180,20340,,,181,21250,,,182,2462,,,183,2515,,,184,1855,,,185,1353,,,186,2512,,,187,4680,,,188,7070,,,189,9318,,,190,7471,,,191,3392,,,192,2988,,,193,2754,,,194,2827,,,195,3932,,,196,27800,,,197,32700,,,198,39900,,,199,42400,,,200,41800,,,201,66100,,,202,88900,,,203,120400,,,204,89700,,,205,50700,,,206,23900,,,207,33700,,,208,32100,,,209,40200,,,210,60201,,,211,43473,,,212,33570,,,213,23273,,,214,20899,,,215,21183,,,216,19269,,,217,18131,,,218,13701,,,219,14574,,,220,16633,,,221,16892,,,222,16558,,,223,16884,,,224,192557,,,225,172836,,,226,161914,,,227,424856,,,228,394756,,,229,282780,,,230,254588,,,231,515201,,,232,496549,,,233,406725,,,234,424499,,,235,354327,,,236,321305,,,237,279021,,,238,345779,,,239,351187,,,240,343811,,,241,373918,,,242,371983,,,243,372329,,,244,325621,,,245,336646,,,246,344509,,,247,297092,,,248,287071,,,249,266867,,,250,303926,,,251,306742,,,252,173071,,,253,163898,,,254,158941,,,255,168875,,,256,178530,,,257,253729,,,258,302963,,,259,300360,,,260,302174,,,261,232844,,,262,293070,,,263,307249,,,264,300177,,,265,369267,,,266,10792,,,267,11055,,,268,10988,,,269,12554,,,270,12245,,,271,13759,,,272,13731,,,273,15766,,,274,16801,,,275,14635,,,276,15814,,,277,19108,,,278,19439,,,279,19797,,,280,6414,,,281,8053,,,282,5828,,,283,6945,,,284,8513,,,285,9172,,,286,6874,,,287,7186,,,288,15913,,,289,23852,,,290,26180,,,291,21992,,,292,18153,,,293,60709,,,294,91383,,,295,94507,,,296,86619,,,297,73566,,,298,65121,,,299,63415,,,300,67657,,,301,80258,,,302,103356,,,303,104410,,,304,110235,,,305,118457,,,306,115678,,,307,122321,,,308,37457,,,309,54052,,,310,70533,,,311,64968,,,312,55410,,,313,54798,,,314,58712,,,315,59602,,,316,63910,,,317,60326,,,318,57618,,,319,60997,,,320,62045,,,321,67509,,,322,27785,,,323,25412,,,324,30788,,,325,26787,,,326,27864,,,327,31355,,,328,37425,,,329,53498,,,330,58820,,,331,56682,,,332,65065,,,333,70759,,,334,70012,,,335,66934,,,336,15897,,,337,21466,,,338,30243,,,339,30325,,,340,36851,,,341,38512,,,342,34210,,,343,40637,,,344,41834,,,345,41277,,,346,41061,,,347,41336,,,348,47131,,,349,46614,,,350,15932,,,351,151433,,,352,71974,,,353,31754,,,354,34096,,,355,28092,,,356,22457,,,357,32599,,,358,72826,,,359,61445,,,360,50747,,,361,45369,,,362,38537,,,363,33246,,,364,4622,,,365,4723,,,366,4784,,,367,4562,,,368,7919,,,369,7665,,,370,11309,,,371,14848,,,372,16470,,,373,14438,,,374,12659,,,375,8224,,,376,2940,,,377,2475,,,385,30468,,,386,43772,,,387,24168,,,388,11321,,,389,17974,,,390,17277,,,391,15724,,,392,330881,,,393,394048,,,394,443085,,,395,429524,,,396,645844,,,397,682711,,,398,802971,,,399,920534,,,400,692228,,,401,469342,,,402,431334,,,403,416282,,,404,336110,,,405,307036,,,406,42216,,,407,43833,,,408,47603,,,409,47988,,,410,47580,,,411,51297,,,412,80398,,,413,83536,,,414,83318,,,415,83763,,,416,79036,,,417,75852,,,418,82597,,,419,95361,,,420,87448,,,421,101353,,,422,101876,,,423,94049,,,424,96270,,,425,94357,,,426,102657,,,427,139685,,,428,157271,,,429,132444,,,430,134171,,,431,142471,,,432,143783,,,433,155401,,,444,29905,e,,448,260424,,,449,262239,,,450,288770,,,451,327405,,,452,434322,,,453,405111,,,454,451702,,,455,455000,,,456,456000,,,457,430000,,,458,459000,,,459,453000,,,460,383000,,,461,406000,,,462,841002,,,463,1058902,,,464,1059356,,,465,703542,,,466,957883,,,467,1122373,,,468,1266264,,,469,1052415,,,470,1107126,,,471,1130818,,,472,1042625,,,473,1062040,,,474,1031631,,,475,990553,,,|1,2,3,4,6,7,9,10,11,12,13,15,17,18,19,20,21,22,23,24,25,26,27,29,30,31,32,33,34,|"/><div class="divPagination"><table class="HeaderTable" id="HeaderTable"><tr></tr></table></div><div id="tablecontainer"><div id="tabletofreeze"><table cellpadding="0" cellspacing="1" class="DataTable"><thead><tr><th class="PDimName" code="CO2" colspan="2" dscode="MIG"><a class="dimensionSelectMemberWhiteButton" href="#" onclick="OpenDialog('./ModalDimWebTree.aspx?DimensionCode=CO2', 'Customize');" title="Select variables">Country of birth/nationality</a></th><th class="PDim" colspan="14"><select class="PDim" id="PDim_CO2" name="PDim_CO2" onchange="ChgPageSel(this)" style="width:247;"><option value="0~AFG">Afghanistan</option><option value="1~ALB">Albania</option><option value="2~DZA">Algeria</option><option value="3~AND">Andorra</option><option value="4~AGO">Angola</option><option value="5~ATG">Antigua and Barbuda</option><option value="6~ARG">Argentina</option><option value="7~ARM">Armenia</option><option value="8~AUS">Australia</option><option value="9~AUT">Austria</option><option value="10~AZE">Azerbaijan</option><option value="11~BHS">Bahamas</option><option value="12~BHR">Bahrain</option><option value="13~BGD">Bangladesh</option><option value="14~BRB">Barbados</option><option value="15~BLR">Belarus</option><option value="16~BEL">Belgium</option><option value="17~BLZ">Belize</option><option value="18~BEN">Benin</option><option value="19~BMU">Bermuda</option><option value="20~BTN">Bhutan</option><option value="21~BOL">Bolivia</option><option value="22~BIH">Bosnia and Herzegovina</option><option value="23~BWA">Botswana</option><option value="24~BRA">Brazil</option><option value="25~BRN">Brunei Darussalam</option><option value="26~BGR">Bulgaria</option><option value="27~BFA">Burkina Faso</option><option value="28~BDI">Burundi</option><option value="29~KHM">Cambodia</option><option value="30~CMR">Cameroon</option><option value="31~CAN">Canada</option><option value="32~CPV">Cape Verde</option><option value="33~CAF">Central African Republic</option><option value="34~TCD">Chad</option><option value="35~CHL">Chile</option><option value="36~CHN">China</option><option value="37~COL">Colombia</option><option value="38~COM">Comoros</option><option value="39~COG">Congo</option><option value="40~COK">Cook Islands</option><option value="41~CRI">Costa Rica</option><option value="42~CIV">Côte d'Ivoire</option><option value="43~HRV">Croatia</option><option value="44~CUB">Cuba</option><option value="45~CYP">Cyprus</option><option value="46~CZE">Czech Republic</option><option value="47~PRK">Democratic People's Republic of Korea</option><option value="48~COD">Democratic Republic of the Congo</option><option value="49~DNK">Denmark</option><option value="50~DJI">Djibouti</option><option value="51~DMA">Dominica</option><option value="52~DOM">Dominican Republic</option><option value="53~ECU">Ecuador</option><option value="54~EGY">Egypt</option><option value="55~SLV">El Salvador</option><option value="56~GNQ">Equatorial Guinea</option><option value="57~ERI">Eritrea</option><option value="58~EST">Estonia</option><option value="59~ETH">Ethiopia</option><option value="60~FJI">Fiji</option><option value="61~FIN">Finland</option><option value="62~CSK">Former Czechoslovakia</option><option value="63~SUN">Former USSR</option><option value="64~YUCS">Former Yugoslavia</option><option value="65~FRA">France</option><option value="66~GAB">Gabon</option><option value="67~GMB">Gambia</option><option value="68~GEO">Georgia</option><option value="69~DEU">Germany</option><option value="70~GHA">Ghana</option><option value="71~GRC">Greece</option><option value="72~GRD">Grenada</option><option value="73~GUM">Guam</option><option value="74~GTM">Guatemala</option><option value="75~GIN">Guinea</option><option value="76~GNB">Guinea-Bissau</option><option value="77~GUY">Guyana</option><option value="78~HTI">Haiti</option><option value="79~HND">Honduras</option><option value="80~HKG">Hong Kong, China</option><option value="81~HUN">Hungary</option><option value="82~ISL">Iceland</option><option value="83~IND">India</option><option value="84~IDN">Indonesia</option><option value="85~IRN">Iran</option><option value="86~IRQ">Iraq</option><option value="87~IRL">Ireland</option><option value="88~ISR">Israel</option><option value="89~ITA">Italy</option><option value="90~JAM">Jamaica</option><option value="91~JPN">Japan</option><option value="92~JOR">Jordan</option><option value="93~KAZ">Kazakhstan</option><option value="94~KEN">Kenya</option><option value="95~KIR">Kiribati</option><option value="96~KOR">Korea</option><option value="97~KWT">Kuwait</option><option value="98~KGZ">Kyrgyzstan</option><option value="99~LAO">Laos</option><option value="100~LVA">Latvia</option><option value="101~LBN">Lebanon</option><option value="102~LSO">Lesotho</option><option value="103~LBR">Liberia</option><option value="104~LBY">Libya</option><option value="105~LIE">Liechtenstein</option><option value="106~LTU">Lithuania</option><option value="107~LUX">Luxembourg</option><option value="108~MAC">Macau</option><option value="109~MKD">Former Yug. Rep. of Macedonia</option><option value="110~MDG">Madagascar</option><option value="111~MWI">Malawi</option><option value="112~MYS">Malaysia</option><option value="113~MDV">Maldives</option><option value="114~MLI">Mali</option><option value="115~MLT">Malta</option><option value="116~MHL">Marshall Islands</option><option value="117~MRT">Mauritania</option><option value="118~MUS">Mauritius</option><option value="119~MEX">Mexico</option><option value="120~FSM">Micronesia</option><option value="121~MDA">Moldova</option><option value="122~MCO">Monaco</option><option value="123~MNG">Mongolia</option><option value="124~MNE">Montenegro</option><option value="125~MAR">Morocco</option><option value="126~MOZ">Mozambique</option><option value="127~MMR">Myanmar</option><option value="128~NAM">Namibia</option><option value="129~NRU">Nauru</option><option value="130~NPL">Nepal</option><option value="131~NLD">Netherlands</option><option value="132~NZL">New Zealand</option><option value="133~NIC">Nicaragua</option><option value="134~NER">Niger</option><option value="135~NGA">Nigeria</option><option value="136~NIU">Niue</option><option value="137~NOR">Norway</option><option value="138~OMN">Oman</option><option value="139~PAK">Pakistan</option><option value="140~PLW">Palau</option><option value="141~PSE">Palestinian administrative areas</option><option value="142~PAN">Panama</option><option value="143~PNG">Papua New Guinea</option><option value="144~PRY">Paraguay</option><option value="145~PER">Peru</option><option value="146~PHL">Philippines</option><option value="147~POL">Poland</option><option value="148~PRT">Portugal</option><option value="149~PRI">Puerto Rico</option><option value="150~QAT">Qatar</option><option value="151~ROU">Romania</option><option value="152~RUS">Russian Federation</option><option value="153~RWA">Rwanda</option><option value="154~KNA">Saint Kitts and Nevis</option><option value="155~LCA">Saint Lucia</option><option value="156~VCT">Saint Vincent and the Grenadines</option><option value="157~WSM">Samoa</option><option value="158~SMR">San Marino</option><option value="159~STP">Sao Tome and Principe</option><option value="160~SAU">Saudi Arabia</option><option value="161~SEN">Senegal</option><option value="162~SCG">Serbia and Montenegro</option><option value="163~SYC">Seychelles</option><option value="164~SLE">Sierra Leone</option><option value="165~SRB">Serbia</option><option value="166~SGP">Singapore</option><option value="167~SVK">Slovak Republic</option><option value="168~SVN">Slovenia</option><option value="169~SLB">Solomon Islands</option><option value="170~SOM">Somalia</option><option value="171~ZAF">South Africa</option><option value="172~ESP">Spain</option><option value="173~LKA">Sri Lanka</option><option value="174~SDN">Sudan</option><option value="175~SUR">Suriname</option><option value="176~SWZ">Swaziland</option><option value="177~SWE">Sweden</option><option value="178~CHE">Switzerland</option><option value="179~SYR">Syria</option><option value="180~TWN">Chinese Taipei</option><option value="181~TJK">Tajikistan</option><option value="182~TZA">Tanzania</option><option value="183~THA">Thailand</option><option value="184~TLS">Timor-Leste</option><option value="185~TGO">Togo</option><option value="186~TKL">Tokelau</option><option value="187~TON">Tonga</option><option value="188~TTO">Trinidad and Tobago</option><option value="189~TUN">Tunisia</option><option value="190~TUR">Turkey</option><option value="191~TKM">Turkmenistan</option><option value="192~TUV">Tuvalu</option><option value="193~UGA">Uganda</option><option value="194~UKR">Ukraine</option><option value="195~ARE">United Arab Emirates</option><option value="196~GBR">United Kingdom</option><option value="197~USA">United States</option><option value="198~URY">Uruguay</option><option value="199~UZB">Uzbekistan</option><option value="200~VUT">Vanuatu</option><option value="201~VEN">Venezuela</option><option value="202~VNM">Viet Nam</option><option value="203~YEM">Yemen</option><option value="204~ZMB">Zambia</option><option value="205~ZWE">Zimbabwe</option><option selected="selected" value="206~TOT">Total</option><option value="207~NS">Not stated</option><option value="208~UUU">Unknown</option><option value="209~YYY">Stateless</option></select></th></tr><tr><th class="PDimName" code="VAR" colspan="2" dscode="MIG"><a class="dimensionSelectMemberWhiteButton" href="#" onclick="OpenDialog('./ModalDimWebTree.aspx?DimensionCode=VAR', 'Customize');" title="Select variables">Variable</a></th><th class="PDim" colspan="14"><select class="PDim" id="PDim_VAR" name="PDim_VAR" onchange="ChgPageSel(this)" style="width:379;"><option selected="selected" value="0~B11">Inflows of foreign population by nationality</option><option value="1~B12">Outflows of foreign population by nationality</option><option value="2~B13">Inflows of asylum seekers by nationality</option><option value="3~B14">Stock of foreign-born population by country of birth</option><option value="4~B15">Stock of foreign population by nationality</option><option value="5~B16">Acquisition of nationality by country of former nationality</option><option value="6~B21">Inflows of foreign workers by nationality</option><option value="7~B22">Inflows of seasonal foreign workers by nationality</option><option value="8~B23">Stock of foreign-born labour by country of birth</option><option value="9~B24">Stock of foreign labour by nationality</option></select><img alt="Information on item" class="cursor metadataLink" onclick="javascript:ShowMetadata('MIG','[VAR].[B11]',true);" src="Images/info.gif"/></th></tr><tr><th class="PDimName" code="GEN" colspan="2" dscode="MIG"><a class="dimensionSelectMemberWhiteButton" href="#" onclick="OpenDialog('./ModalDimWebTree.aspx?DimensionCode=GEN', 'Customize');" title="Select variables">Gender</a></th><th class="PDim" colspan="14">Total</th></tr><tr><th class="HDimName" code="YEA" colspan="2" rowspan="2"><a class="dimensionSelectMemberButton" href="#" onclick="OpenDialog('./ModalTimeDimension.aspx?DimensionCode=YEA', 'Customize');" title="Select variables">Year</a></th><th class="HDim" style="border-bottom:0px">2000</th><th class="HDim" style="border-bottom:0px">2001</th><th class="HDim" style="border-bottom:0px">2002</th><th class="HDim" style="border-bottom:0px">2003</th><th class="HDim" style="border-bottom:0px">2004</th><th class="HDim" style="border-bottom:0px">2005</th><th class="HDim" style="border-bottom:0px">2006</th><th class="HDim" style="border-bottom:0px">2007</th><th class="HDim" style="border-bottom:0px">2008</th><th class="HDim" style="border-bottom:0px">2009</th><th class="HDim" style="border-bottom:0px">2010</th><th class="HDim" style="border-bottom:0px">2011</th><th class="HDim" style="border-bottom:0px">2012</th><th class="HDim" style="border-bottom:0px">2013</th></tr><tr><th class="HDim" code="" style="border-top:0px"><img alt="Sort ascending" class="cursor" onclick="javascript:onSort(1,1)" src="Images/up_blue.gif"/><img alt="Sort descending" class="cursor" onclick="javascript:onSort(1,-1)" src="Images/down_blue.gif"/></th><th class="HDim" code="" style="border-top:0px"><img alt="Sort ascending" class="cursor" onclick="javascript:onSort(2,1)" src="Images/up_blue.gif"/><img alt="Sort descending" class="cursor" onclick="javascript:onSort(2,-1)" src="Images/down_blue.gif"/></th><th class="HDim" code="" style="border-top:0px"><img alt="Sort ascending" class="cursor" onclick="javascript:onSort(3,1)" src="Images/up_blue.gif"/><img alt="Sort descending" class="cursor" onclick="javascript:onSort(3,-1)" src="Images/down_blue.gif"/></th><th class="HDim" code="" style="border-top:0px"><img alt="Sort ascending" class="cursor" onclick="javascript:onSort(4,1)" src="Images/up_blue.gif"/><img alt="Sort descending" class="cursor" onclick="javascript:onSort(4,-1)" src="Images/down_blue.gif"/></th><th class="HDim" code="" style="border-top:0px"><img alt="Sort ascending" class="cursor" onclick="javascript:onSort(5,1)" src="Images/up_blue.gif"/><img alt="Sort descending" class="cursor" onclick="javascript:onSort(5,-1)" src="Images/down_blue.gif"/></th><th class="HDim" code="" style="border-top:0px"><img alt="Sort ascending" class="cursor" onclick="javascript:onSort(6,1)" src="Images/up_blue.gif"/><img alt="Sort descending" class="cursor" onclick="javascript:onSort(6,-1)" src="Images/down_blue.gif"/></th><th class="HDim" code="" style="border-top:0px"><img alt="Sort ascending" class="cursor" onclick="javascript:onSort(7,1)" src="Images/up_blue.gif"/><img alt="Sort descending" class="cursor" onclick="javascript:onSort(7,-1)" src="Images/down_blue.gif"/></th><th class="HDim" code="" style="border-top:0px"><img alt="Sort ascending" class="cursor" onclick="javascript:onSort(8,1)" src="Images/up_blue.gif"/><img alt="Sort descending" class="cursor" onclick="javascript:onSort(8,-1)" src="Images/down_blue.gif"/></th><th class="HDim" code="" style="border-top:0px"><img alt="Sort ascending" class="cursor" onclick="javascript:onSort(9,1)" src="Images/up_blue.gif"/><img alt="Sort descending" class="cursor" onclick="javascript:onSort(9,-1)" src="Images/down_blue.gif"/></th><th class="HDim" code="" style="border-top:0px"><img alt="Sort ascending" class="cursor" onclick="javascript:onSort(10,1)" src="Images/up_blue.gif"/><img alt="Sort descending" class="cursor" onclick="javascript:onSort(10,-1)" src="Images/down_blue.gif"/></th><th class="HDim" code="" style="border-top:0px"><img alt="Sort ascending" class="cursor" onclick="javascript:onSort(11,1)" src="Images/up_blue.gif"/><img alt="Sort descending" class="cursor" onclick="javascript:onSort(11,-1)" src="Images/down_blue.gif"/></th><th class="HDim" code="" style="border-top:0px"><img alt="Sort ascending" class="cursor" onclick="javascript:onSort(12,1)" src="Images/up_blue.gif"/><img alt="Sort descending" class="cursor" onclick="javascript:onSort(12,-1)" src="Images/down_blue.gif"/></th><th class="HDim" code="" style="border-top:0px"><img alt="Sort ascending" class="cursor" onclick="javascript:onSort(13,1)" src="Images/up_blue.gif"/><img alt="Sort descending" class="cursor" onclick="javascript:onSort(13,-1)" src="Images/down_blue.gif"/></th><th class="HDim" code="" style="border-top:0px"><img alt="Sort ascending" class="cursor" onclick="javascript:onSort(14,1)" src="Images/up_blue.gif"/><img alt="Sort descending" class="cursor" onclick="javascript:onSort(14,-1)" src="Images/down_blue.gif"/></th></tr><tr><th class="VDimName" code="COU"><a class="dimensionSelectMemberButton" href="#" onclick="OpenDialog('./ModalDimWebTree.aspx?DimensionCode=COU', 'Customize');" title="Select variables">Country</a></th><th class="VDimName"></th><th class="SiblingMD"></th><th class="SiblingMD"></th><th class="SiblingMD"></th><th class="SiblingMD"></th><th class="SiblingMD"></th><th class="SiblingMD"></th><th class="SiblingMD"></th><th class="SiblingMD"></th><th class="SiblingMD"></th><th class="SiblingMD"></th><th class="SiblingMD"></th><th class="SiblingMD"></th><th class="SiblingMD"></th><th class="SiblingMD"></th></tr></thead><tbody><tr id="row1"><td class="RowDimLabel">Australia</td><td class="RowDimLabel"><img alt="Information on row" class="cursor metadataLink" onclick="javascript:ShowMetadata('MIG','[CO2].[TOT],[VAR].[B11],[GEN].[TOT],[COU].[AUS]',true);" src="Images/info.gif"/></td><td class="Data">107 148</td><td class="Data">127 877</td><td class="Data">119 080</td><td class="Data">123 411</td><td class="Data">146 441</td><td class="Data">161 734</td><td class="Data">176 205</td><td class="Data">189 490</td><td class="Data">203 874</td><td class="Data">222 572</td><td class="Data">206 714</td><td class="Data">210 704</td><td class="Data">242 385</td><td class="Data">251 850</td></tr><tr id="row2"><td class="RowDimLabel2">Austria</td><td class="RowDimLabel2"><img alt="Information on row" class="cursor metadataLink" onclick="javascript:ShowMetadata('MIG','[CO2].[TOT],[VAR].[B11],[GEN].[TOT],[COU].[AUT]',true);" src="Images/info.gif"/></td><td class="Data2">65 954</td><td class="Data2">74 786</td><td class="Data2">86 144</td><td class="Data2">93 341</td><td class="Data2">104 246</td><td class="Data2">97 995</td><td class="Data2">82 899</td><td class="Data2">91 546</td><td class="Data2">94 368</td><td class="Data2">91 660</td><td class="Data2">96 896</td><td class="Data2">109 921</td><td class="Data2">125 605</td><td class="Data2">135 228</td></tr><tr id="row3"><td class="RowDimLabel">Belgium</td><td class="RowDimLabel"><img alt="Information on row" class="cursor metadataLink" onclick="javascript:ShowMetadata('MIG','[CO2].[TOT],[VAR].[B11],[GEN].[TOT],[COU].[BEL]',true);" src="Images/info.gif"/></td><td class="Data">57 295</td><td class="Data">65 974</td><td class="Data">70 230</td><td class="Data">68 800</td><td class="Data">72 446</td><td class="Data">77 411</td><td class="Data">83 433</td><td class="Data">93 387</td><td class="Data">106 012</td><td class="Data">102 714</td><td class="Data"><table class="FlaggedCell"><tr><td class="Flags"><sup>(<span class="Flag" onmouseout="window.status='';return true;" onmouseover="window.status='Estimated value';return true;" title="Estimated value">e</span>) </sup></td><td class="FlaggedData">113 582</td></tr></table></td><td class="Data">117 948</td><td class="Data">109 995</td><td class="Data">105 519</td></tr><tr id="row4"><td class="RowDimLabel2">Canada</td><td class="RowDimLabel2"><img alt="Information on row" class="cursor metadataLink" onclick="javascript:ShowMetadata('MIG','[CO2].[TOT],[VAR].[B11],[GEN].[TOT],[COU].[CAN]',true);" src="Images/info.gif"/></td><td class="Data2">227 455</td><td class="Data2">250 640</td><td class="Data2">228 919</td><td class="Data2">221 203</td><td class="Data2">235 643</td><td class="Data2">262 067</td><td class="Data2">251 467</td><td class="Data2">236 620</td><td class="Data2">247 065</td><td class="Data2">251 911</td><td class="Data2">280 230</td><td class="Data2">248 335</td><td class="Data2">257 445</td><td class="Data2">258 480</td></tr><tr id="row5"><td class="RowDimLabel">Chile</td><td class="RowDimLabel"></td><td class="Data">18 741</td><td class="Data">28 924</td><td class="Data">29 942</td><td class="Data">29 835</td><td class="Data">32 099</td><td class="Data">38 149</td><td class="Data">48 516</td><td class="Data">79 377</td><td class="Data">68 380</td><td class="Data">57 059</td><td class="Data">63 920</td><td class="Data">76 337</td><td class="Data">105 088</td><td class="Data">132 140</td></tr><tr id="row6"><td class="RowDimLabel2">Czech Republic</td><td class="RowDimLabel2"><img alt="Information on row" class="cursor metadataLink" onclick="javascript:ShowMetadata('MIG','[CO2].[TOT],[VAR].[B11],[GEN].[TOT],[COU].[CZE]',true);" src="Images/info.gif"/></td><td class="Data2">4 227</td><td class="Data2">11 323</td><td class="Data2">43 648</td><td class="Data2">57 438</td><td class="Data2">50 804</td><td class="Data2">58 576</td><td class="Data2">66 125</td><td class="Data2">102 511</td><td class="Data2">77 817</td><td class="Data2">39 973</td><td class="Data2">30 515</td><td class="Data2">22 590</td><td class="Data2">30 298</td><td class="Data2">29 579</td></tr><tr id="row7"><td class="RowDimLabel">Denmark</td><td class="RowDimLabel"><img alt="Information on row" class="cursor metadataLink" onclick="javascript:ShowMetadata('MIG','[CO2].[TOT],[VAR].[B11],[GEN].[TOT],[COU].[DNK]',true);" src="Images/info.gif"/></td><td class="Data">22 766</td><td class="Data">24 642</td><td class="Data">21 485</td><td class="Data">18 385</td><td class="Data">18 706</td><td class="Data">20 146</td><td class="Data">23 979</td><td class="Data">31 430</td><td class="Data">37 018</td><td class="Data">31 957</td><td class="Data">33 442</td><td class="Data">34 572</td><td class="Data">35 490</td><td class="Data">41 342</td></tr><tr id="row8"><td class="RowDimLabel2">Estonia</td><td class="RowDimLabel2"></td><td class="Data2">..</td><td class="Data2">..</td><td class="Data2">..</td><td class="Data2">..</td><td class="Data2">759</td><td class="Data2">981</td><td class="Data2">1 488</td><td class="Data2">1 952</td><td class="Data2">1 929</td><td class="Data2">2 229</td><td class="Data2">1 199</td><td class="Data2">1 675</td><td class="Data2">1 107</td><td class="Data2">1 633</td></tr><tr id="row9"><td class="RowDimLabel">Finland</td><td class="RowDimLabel"><img alt="Information on row" class="cursor metadataLink" onclick="javascript:ShowMetadata('MIG','[CO2].[TOT],[VAR].[B11],[GEN].[TOT],[COU].[FIN]',true);" src="Images/info.gif"/></td><td class="Data">9 110</td><td class="Data">11 037</td><td class="Data">9 972</td><td class="Data">9 432</td><td class="Data">11 511</td><td class="Data">12 744</td><td class="Data">13 868</td><td class="Data">17 504</td><td class="Data">19 906</td><td class="Data">18 087</td><td class="Data">18 212</td><td class="Data">20 416</td><td class="Data">23 334</td><td class="Data">23 873</td></tr><tr id="row10"><td class="RowDimLabel2">France</td><td class="RowDimLabel2"><img alt="Information on row" class="cursor metadataLink" onclick="javascript:ShowMetadata('MIG','[CO2].[TOT],[VAR].[B11],[GEN].[TOT],[COU].[FRA]',true);" src="Images/info.gif"/></td><td class="Data2">91 875</td><td class="Data2">106 877</td><td class="Data2">124 232</td><td class="Data2">136 370</td><td class="Data2">141 554</td><td class="Data2">135 866</td><td class="Data2">159 391</td><td class="Data2">145 876</td><td class="Data2">153 331</td><td class="Data2">159 607</td><td class="Data2">157 759</td><td class="Data2">154 803</td><td class="Data2">163 446</td><td class="Data2">171 925</td></tr><tr id="row11"><td class="RowDimLabel">Germany<img alt="Information on item" class="cursor metadataLink" onclick="javascript:ShowMetadata('MIG','[COU].[DEU]',true);" src="Images/info.gif"/></td><td class="RowDimLabel"><img alt="Information on row" class="cursor metadataLink" onclick="javascript:ShowMetadata('MIG','[CO2].[TOT],[VAR].[B11],[GEN].[TOT],[COU].[DEU]',true);" src="Images/info.gif"/></td><td class="Data">648 846</td><td class="Data">685 259</td><td class="Data">658 341</td><td class="Data">601 759</td><td class="Data">602 182</td><td class="Data">579 301</td><td class="Data">558 467</td><td class="Data">574 752</td><td class="Data">573 815</td><td class="Data">606 314</td><td class="Data">683 529</td><td class="Data">841 695</td><td class="Data">965 908</td><td class="Data">1 108 068</td></tr><tr id="row12"><td class="RowDimLabel2">Greece</td><td class="RowDimLabel2"><img alt="Information on row" class="cursor metadataLink" onclick="javascript:ShowMetadata('MIG','[CO2].[TOT],[VAR].[B11],[GEN].[TOT],[COU].[GRC]',true);" src="Images/info.gif"/></td><td class="Data2">..</td><td class="Data2">..</td><td class="Data2">..</td><td class="Data2">..</td><td class="Data2">..</td><td class="Data2">65 318</td><td class="Data2">63 216</td><td class="Data2">46 333</td><td class="Data2">42 901</td><td class="Data2">46 534</td><td class="Data2">33 368</td><td class="Data2">23 206</td><td class="Data2">17 732</td><td class="Data2">..</td></tr><tr id="row13"><td class="RowDimLabel">Hungary</td><td class="RowDimLabel"><img alt="Information on row" class="cursor metadataLink" onclick="javascript:ShowMetadata('MIG','[CO2].[TOT],[VAR].[B11],[GEN].[TOT],[COU].[HUN]',true);" src="Images/info.gif"/></td><td class="Data">20 184</td><td class="Data">20 308</td><td class="Data">17 972</td><td class="Data">19 365</td><td class="Data">22 164</td><td class="Data">25 582</td><td class="Data">23 569</td><td class="Data">22 607</td><td class="Data">35 547</td><td class="Data">25 582</td><td class="Data">23 884</td><td class="Data">22 514</td><td class="Data">20 340</td><td class="Data">21 250</td></tr><tr id="row14"><td class="RowDimLabel2">Iceland</td><td class="RowDimLabel2"></td><td class="Data2">2 462</td><td class="Data2">2 515</td><td class="Data2">1 855</td><td class="Data2">1 353</td><td class="Data2">2 512</td><td class="Data2">4 680</td><td class="Data2">7 070</td><td class="Data2">9 318</td><td class="Data2">7 471</td><td class="Data2">3 392</td><td class="Data2">2 988</td><td class="Data2">2 754</td><td class="Data2">2 827</td><td class="Data2">3 932</td></tr><tr id="row15"><td class="RowDimLabel">Ireland</td><td class="RowDimLabel"><img alt="Information on row" class="cursor metadataLink" onclick="javascript:ShowMetadata('MIG','[CO2].[TOT],[VAR].[B11],[GEN].[TOT],[COU].[IRL]',true);" src="Images/info.gif"/></td><td class="Data">27 800</td><td class="Data">32 700</td><td class="Data">39 900</td><td class="Data">42 400</td><td class="Data">41 800</td><td class="Data">66 100</td><td class="Data">88 900</td><td class="Data">120 400</td><td class="Data">89 700</td><td class="Data">50 700</td><td class="Data">23 900</td><td class="Data">33 700</td><td class="Data">32 100</td><td class="Data">40 200</td></tr><tr id="row16"><td class="RowDimLabel2">Israel<img alt="Information on item" class="cursor metadataLink" onclick="javascript:ShowMetadata('MIG','[COU].[ISR]',true);" src="Images/info.gif"/></td><td class="RowDimLabel2"></td><td class="Data2">60 201</td><td class="Data2">43 473</td><td class="Data2">33 570</td><td class="Data2">23 273</td><td class="Data2">20 899</td><td class="Data2">21 183</td><td class="Data2">19 269</td><td class="Data2">18 131</td><td class="Data2">13 701</td><td class="Data2">14 574</td><td class="Data2">16 633</td><td class="Data2">16 892</td><td class="Data2">16 558</td><td class="Data2">16 884</td></tr><tr id="row17"><td class="RowDimLabel">Italy</td><td class="RowDimLabel"><img alt="Information on row" class="cursor metadataLink" onclick="javascript:ShowMetadata('MIG','[CO2].[TOT],[VAR].[B11],[GEN].[TOT],[COU].[ITA]',true);" src="Images/info.gif"/></td><td class="Data">192 557</td><td class="Data">172 836</td><td class="Data">161 914</td><td class="Data">424 856</td><td class="Data">394 756</td><td class="Data">282 780</td><td class="Data">254 588</td><td class="Data">515 201</td><td class="Data">496 549</td><td class="Data">406 725</td><td class="Data">424 499</td><td class="Data">354 327</td><td class="Data">321 305</td><td class="Data">279 021</td></tr><tr id="row18"><td class="RowDimLabel2">Japan</td><td class="RowDimLabel2"><img alt="Information on row" class="cursor metadataLink" onclick="javascript:ShowMetadata('MIG','[CO2].[TOT],[VAR].[B11],[GEN].[TOT],[COU].[JPN]',true);" src="Images/info.gif"/></td><td class="Data2">345 779</td><td class="Data2">351 187</td><td class="Data2">343 811</td><td class="Data2">373 918</td><td class="Data2">371 983</td><td class="Data2">372 329</td><td class="Data2">325 621</td><td class="Data2">336 646</td><td class="Data2">344 509</td><td class="Data2">297 092</td><td class="Data2">287 071</td><td class="Data2">266 867</td><td class="Data2">303 926</td><td class="Data2">306 742</td></tr><tr id="row19"><td class="RowDimLabel">Korea</td><td class="RowDimLabel"><img alt="Information on row" class="cursor metadataLink" onclick="javascript:ShowMetadata('MIG','[CO2].[TOT],[VAR].[B11],[GEN].[TOT],[COU].[KOR]',true);" src="Images/info.gif"/></td><td class="Data">173 071</td><td class="Data">163 898</td><td class="Data">158 941</td><td class="Data">168 875</td><td class="Data">178 530</td><td class="Data">253 729</td><td class="Data">302 963</td><td class="Data">300 360</td><td class="Data">302 174</td><td class="Data">232 844</td><td class="Data">293 070</td><td class="Data">307 249</td><td class="Data">300 177</td><td class="Data">369 267</td></tr><tr id="row20"><td class="RowDimLabel2">Luxembourg</td><td class="RowDimLabel2"><img alt="Information on row" class="cursor metadataLink" onclick="javascript:ShowMetadata('MIG','[CO2].[TOT],[VAR].[B11],[GEN].[TOT],[COU].[LUX]',true);" src="Images/info.gif"/></td><td class="Data2">10 792</td><td class="Data2">11 055</td><td class="Data2">10 988</td><td class="Data2">12 554</td><td class="Data2">12 245</td><td class="Data2">13 759</td><td class="Data2">13 731</td><td class="Data2">15 766</td><td class="Data2">16 801</td><td class="Data2">14 635</td><td class="Data2">15 814</td><td class="Data2">19 108</td><td class="Data2">19 439</td><td class="Data2">19 797</td></tr><tr id="row21"><td class="RowDimLabel">Mexico</td><td class="RowDimLabel"><img alt="Information on row" class="cursor metadataLink" onclick="javascript:ShowMetadata('MIG','[CO2].[TOT],[VAR].[B11],[GEN].[TOT],[COU].[MEX]',true);" src="Images/info.gif"/></td><td class="Data">6 414</td><td class="Data">8 053</td><td class="Data">5 828</td><td class="Data">6 945</td><td class="Data">8 513</td><td class="Data">9 172</td><td class="Data">6 874</td><td class="Data">7 186</td><td class="Data">15 913</td><td class="Data">23 852</td><td class="Data">26 180</td><td class="Data">21 992</td><td class="Data">18 153</td><td class="Data">60 709</td></tr><tr id="row22"><td class="RowDimLabel2">Netherlands</td><td class="RowDimLabel2"><img alt="Information on row" class="cursor metadataLink" onclick="javascript:ShowMetadata('MIG','[CO2].[TOT],[VAR].[B11],[GEN].[TOT],[COU].[NLD]',true);" src="Images/info.gif"/></td><td class="Data2">91 383</td><td class="Data2">94 507</td><td class="Data2">86 619</td><td class="Data2">73 566</td><td class="Data2">65 121</td><td class="Data2">63 415</td><td class="Data2">67 657</td><td class="Data2">80 258</td><td class="Data2">103 356</td><td class="Data2">104 410</td><td class="Data2">110 235</td><td class="Data2">118 457</td><td class="Data2">115 678</td><td class="Data2">122 321</td></tr><tr id="row23"><td class="RowDimLabel">New Zealand</td><td class="RowDimLabel"><img alt="Information on row" class="cursor metadataLink" onclick="javascript:ShowMetadata('MIG','[CO2].[TOT],[VAR].[B11],[GEN].[TOT],[COU].[NZL]',true);" src="Images/info.gif"/></td><td class="Data">37 457</td><td class="Data">54 052</td><td class="Data">70 533</td><td class="Data">64 968</td><td class="Data">55 410</td><td class="Data">54 798</td><td class="Data">58 712</td><td class="Data">59 602</td><td class="Data">63 910</td><td class="Data">60 326</td><td class="Data">57 618</td><td class="Data">60 997</td><td class="Data">62 045</td><td class="Data">67 509</td></tr><tr id="row24"><td class="RowDimLabel2">Norway</td><td class="RowDimLabel2"><img alt="Information on row" class="cursor metadataLink" onclick="javascript:ShowMetadata('MIG','[CO2].[TOT],[VAR].[B11],[GEN].[TOT],[COU].[NOR]',true);" src="Images/info.gif"/></td><td class="Data2">27 785</td><td class="Data2">25 412</td><td class="Data2">30 788</td><td class="Data2">26 787</td><td class="Data2">27 864</td><td class="Data2">31 355</td><td class="Data2">37 425</td><td class="Data2">53 498</td><td class="Data2">58 820</td><td class="Data2">56 682</td><td class="Data2">65 065</td><td class="Data2">70 759</td><td class="Data2">70 012</td><td class="Data2">66 934</td></tr><tr id="row25"><td class="RowDimLabel">Poland</td><td class="RowDimLabel"><img alt="Information on row" class="cursor metadataLink" onclick="javascript:ShowMetadata('MIG','[CO2].[TOT],[VAR].[B11],[GEN].[TOT],[COU].[POL]',true);" src="Images/info.gif"/></td><td class="Data">15 897</td><td class="Data">21 466</td><td class="Data">30 243</td><td class="Data">30 325</td><td class="Data">36 851</td><td class="Data">38 512</td><td class="Data">34 210</td><td class="Data">40 637</td><td class="Data">41 834</td><td class="Data">41 277</td><td class="Data">41 061</td><td class="Data">41 336</td><td class="Data">47 131</td><td class="Data">46 614</td></tr><tr id="row26"><td class="RowDimLabel2">Portugal</td><td class="RowDimLabel2"><img alt="Information on row" class="cursor metadataLink" onclick="javascript:ShowMetadata('MIG','[CO2].[TOT],[VAR].[B11],[GEN].[TOT],[COU].[PRT]',true);" src="Images/info.gif"/></td><td class="Data2">15 932</td><td class="Data2">151 433</td><td class="Data2">71 974</td><td class="Data2">31 754</td><td class="Data2">34 096</td><td class="Data2">28 092</td><td class="Data2">22 457</td><td class="Data2">32 599</td><td class="Data2">72 826</td><td class="Data2">61 445</td><td class="Data2">50 747</td><td class="Data2">45 369</td><td class="Data2">38 537</td><td class="Data2">33 246</td></tr><tr id="row27"><td class="RowDimLabel">Slovak Republic</td><td class="RowDimLabel"><img alt="Information on row" class="cursor metadataLink" onclick="javascript:ShowMetadata('MIG','[CO2].[TOT],[VAR].[B11],[GEN].[TOT],[COU].[SVK]',true);" src="Images/info.gif"/></td><td class="Data">4 622</td><td class="Data">4 723</td><td class="Data">4 784</td><td class="Data">4 562</td><td class="Data">7 919</td><td class="Data">7 665</td><td class="Data">11 309</td><td class="Data">14 848</td><td class="Data">16 470</td><td class="Data">14 438</td><td class="Data">12 659</td><td class="Data">8 224</td><td class="Data">2 940</td><td class="Data">2 475</td></tr><tr id="row28"><td class="RowDimLabel2">Slovenia</td><td class="RowDimLabel2"></td><td class="Data2">..</td><td class="Data2">..</td><td class="Data2">..</td><td class="Data2">..</td><td class="Data2">..</td><td class="Data2">..</td><td class="Data2">..</td><td class="Data2">30 468</td><td class="Data2">43 772</td><td class="Data2">24 168</td><td class="Data2">11 321</td><td class="Data2">17 974</td><td class="Data2">17 277</td><td class="Data2">15 724</td></tr><tr id="row29"><td class="RowDimLabel">Spain</td><td class="RowDimLabel"><img alt="Information on row" class="cursor metadataLink" onclick="javascript:ShowMetadata('MIG','[CO2].[TOT],[VAR].[B11],[GEN].[TOT],[COU].[ESP]',true);" src="Images/info.gif"/></td><td class="Data">330 881</td><td class="Data">394 048</td><td class="Data">443 085</td><td class="Data">429 524</td><td class="Data">645 844</td><td class="Data">682 711</td><td class="Data">802 971</td><td class="Data">920 534</td><td class="Data">692 228</td><td class="Data">469 342</td><td class="Data">431 334</td><td class="Data">416 282</td><td class="Data">336 110</td><td class="Data">307 036</td></tr><tr id="row30"><td class="RowDimLabel2">Sweden</td><td class="RowDimLabel2"><img alt="Information on row" class="cursor metadataLink" onclick="javascript:ShowMetadata('MIG','[CO2].[TOT],[VAR].[B11],[GEN].[TOT],[COU].[SWE]',true);" src="Images/info.gif"/></td><td class="Data2">42 216</td><td class="Data2">43 833</td><td class="Data2">47 603</td><td class="Data2">47 988</td><td class="Data2">47 580</td><td class="Data2">51 297</td><td class="Data2">80 398</td><td class="Data2">83 536</td><td class="Data2">83 318</td><td class="Data2">83 763</td><td class="Data2">79 036</td><td class="Data2">75 852</td><td class="Data2">82 597</td><td class="Data2">95 361</td></tr><tr id="row31"><td class="RowDimLabel">Switzerland</td><td class="RowDimLabel"><img alt="Information on row" class="cursor metadataLink" onclick="javascript:ShowMetadata('MIG','[CO2].[TOT],[VAR].[B11],[GEN].[TOT],[COU].[CHE]',true);" src="Images/info.gif"/></td><td class="Data">87 448</td><td class="Data">101 353</td><td class="Data">101 876</td><td class="Data">94 049</td><td class="Data">96 270</td><td class="Data">94 357</td><td class="Data">102 657</td><td class="Data">139 685</td><td class="Data">157 271</td><td class="Data">132 444</td><td class="Data">134 171</td><td class="Data">142 471</td><td class="Data">143 783</td><td class="Data">155 401</td></tr><tr id="row32"><td class="RowDimLabel2">Turkey</td><td class="RowDimLabel2"><img alt="Information on row" class="cursor metadataLink" onclick="javascript:ShowMetadata('MIG','[CO2].[TOT],[VAR].[B11],[GEN].[TOT],[COU].[TUR]',true);" src="Images/info.gif"/></td><td class="Data2">..</td><td class="Data2">..</td><td class="Data2">..</td><td class="Data2">..</td><td class="Data2">..</td><td class="Data2">..</td><td class="Data2">..</td><td class="Data2">..</td><td class="Data2">..</td><td class="Data2">..</td><td class="Data2"><table class="FlaggedCell"><tr><td class="Flags"><sup>(<span class="Flag" onmouseout="window.status='';return true;" onmouseover="window.status='Estimated value';return true;" title="Estimated value">e</span>) </sup></td><td class="FlaggedData">29 905</td></tr></table></td><td class="Data2">..</td><td class="Data2">..</td><td class="Data2">..</td></tr><tr id="row33"><td class="RowDimLabel">United Kingdom</td><td class="RowDimLabel"><img alt="Information on row" class="cursor metadataLink" onclick="javascript:ShowMetadata('MIG','[CO2].[TOT],[VAR].[B11],[GEN].[TOT],[COU].[GBR]',true);" src="Images/info.gif"/></td><td class="Data">260 424</td><td class="Data">262 239</td><td class="Data">288 770</td><td class="Data">327 405</td><td class="Data">434 322</td><td class="Data">405 111</td><td class="Data">451 702</td><td class="Data">455 000</td><td class="Data">456 000</td><td class="Data">430 000</td><td class="Data">459 000</td><td class="Data">453 000</td><td class="Data">383 000</td><td class="Data">406 000</td></tr><tr id="row34"><td class="RowDimLabel2">United States</td><td class="RowDimLabel2"><img alt="Information on row" class="cursor metadataLink" onclick="javascript:ShowMetadata('MIG','[CO2].[TOT],[VAR].[B11],[GEN].[TOT],[COU].[USA]',true);" src="Images/info.gif"/></td><td class="Data2">841 002</td><td class="Data2">1 058 902</td><td class="Data2">1 059 356</td><td class="Data2">703 542</td><td class="Data2">957 883</td><td class="Data2">1 122 373</td><td class="Data2">1 266 264</td><td class="Data2">1 052 415</td><td class="Data2">1 107 126</td><td class="Data2">1 130 818</td><td class="Data2">1 042 625</td><td class="Data2">1 062 040</td><td class="Data2">1 031 631</td><td class="Data2">990 553</td></tr></tbody></table></div></div><div class="divPagination"><table class="HeaderTable"><tr></tr></table></div><div id="divFlag"><span class="FlagLegendTitle">Legend:</span><table class="FlagLegend"><tr><td class="FlagCode">e</td><td class="FlagDescription">Estimated value</td></tr></table></div><div id="divQueryInformation"><span class="PowerExpression">Data extracted on 31 Oct 2015 02:20 UTC (GMT) from <a href="http://stats.oecd.org" target="_blank">OECD.Stat</a></span><span id="divfreezetable"></span></div><!--
+WebTableGenerator performance statistics:
+Ready for DatasetBrowser call 15.625 milliseconds after start. Requesting 476 observations.
+Got result from DatasetBrowser 375 milliseconds after start. Retrieving 446 observations.
+Ready for DatasetBrowser call 375 milliseconds after start. Requesting 49 metadata.
+Got result from DatasetBrowser 437.5 milliseconds after start. Retrieving 29 metadata.
+Ready for DatasetBrowser call (Flags) 437.5 milliseconds after start.
+Got result from DatasetBrowser (Flags) 500 milliseconds after start.
+Ready to deliver result table 500 milliseconds after start.
+--></webtable></div>
+<script language="javascript" type="text/javascript">
+        if (typeof centerwidth != "undefined" && typeof middleheight != "undefined") {
+            setupTableLayout();
+        }
+    </script>
+<div style="display: none">
+</div>
+<script language="javascript" type="text/javascript">
+        var treeviewdatasetcode = "";
+        var treeviewqueryid = 0;
+        $(function(){
+
+            
+    
+             showMetadata('MIG'); $('#divmetadata').delay(2000).hide("fast", function() { $("#toggler-east").removeClass("toggler-east-open").addClass("toggler-east-closed");centerwidth = 0;middleheight = 0; setupLayout(); if (!($.browser.msie)) {freezeTable();} });
+
+            self.scrollTo(0,0);
+            try
+            {
+                
+            }
+            catch(ex)
+            {
+                alert( "Error in Merged Queries:" + ex.message );
+            }
+	
+            var treeviewlink;
+
+            treeviewdatasetcode = 'MIG';treeviewqueryid = 17761;
+
+            treeviewlink = $("#browsethemes a[qid= '" + treeviewqueryid +"' ]");
+
+            if (treeviewqueryid && !treeviewlink.hasClass("ds"))
+            {
+                if (!treeviewlink.hasClass("qclicked"))
+                { 
+                    $(".qclicked").removeClass("qclicked");
+                    treeviewlink.addClass("qclicked");
+                    //        if (typeof ishotlink != 'undefined') {
+                    //            if (ishotlink == true) { $("#browsePanel").tabs('select', 0); }
+                    //        }
+                    treeviewlink.parents("li.t").removeClass("closed").addClass("opened").children("ul").show();
+                }
+            }
+            else if (treeviewdatasetcode)
+            {
+                treeviewlink = $("#browsethemes a[dscode= '" + treeviewdatasetcode +"' ]").first();
+                if (!treeviewlink.hasClass("dsclicked") || !treeviewlink.hasClass("pdsclicked"))
+                { 
+                    $(".dsclicked").removeClass("dsclicked");
+                    $(".pdsclicked").removeClass("pdsclicked");
+                    if (treeviewlink.hasClass("pds"))
+                    { 
+                        treeviewlink.addClass("pdsclicked");
+                    }
+                    else
+                    {
+                        treeviewlink.addClass("dsclicked");
+                    }
+                    treeviewlink.parents("li.t").removeClass("closed").addClass("opened").children("ul").show();
+                }
+            }
+	
+            displayLogo('');$("#divcontent").css("overflow", "none");;
+        });
+    </script>
+<script language="javascript" type="text/javascript">
+        if (typeof pageTracker != "undefined") {
+            pageTracker._trackPageview("/Dataset/MIG/Public/17761");
+        }
+    </script>
+</div>
+</div>
+<div class="left" id="contentLoading" style="position: relative;display: none">
+<br/>
+<br/>
+<br/>
+<table border="0" cellpadding="0" cellspacing="0" style="width: 100%; height: 100%;">
+<tr>
+<td align="center" valign="top">
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+<td>
+                                              Loading...
+                            </td>
+<td>
+<img alt="Loading" src="../images/FV/spinner.gif" style="width: 16; height: 16;"/>       
+                            </td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</div>
+<div id="dialog-modal">
+<div id="dialog-loading">
+</div>
+<div id="dialog-content">
+</div>
+</div>
+<div id="dialog2-modal">
+<div id="dialog2-loading">
+</div>
+<div id="dialog2-content">
+</div>
+</div>
+<div id="dialog-metadata"></div>
+<script language="text/javascript" type="text/javascript">
+            var isbrandedview = false;
+    </script>
+<script type="text/javascript">
+        var DisplayMeatadataInModal = true;
+
+        var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+        document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+<script type="text/javascript">
+        var pageTracker = _gat._getTracker("UA-4129074-1");
+        
+            pageTracker._setVar("EXTRAOECD");
+        
+        pageTracker._trackPageview("/Dataset/MIG/Public/17761");
+    </script>
+</div>
+<div id="_ctl0__ctl0_DivFooter">
+<div id="footer">
+<div class="left">
+                        Powered by .Stat technology | © OECD. 
+                        All rights reserved.
+                        <a class="header_navigation" href="http://www.oecd.org/document/0,3343,en_2649_201185_1899066_1_1_1_1,00.html" id="_ctl0__ctl0_oHRefConditions" target="_blank">
+                            Terms &amp; Conditions | 
+                        </a>
+<a class="header_navigation" href="http://www.oecd.org/document/0,3343,en_2649_201185_1899048_1_1_1_1,00.html" id="_ctl0__ctl0_oHRefPrivacy" target="_blank">
+                            Privacy Policy
+                        </a>
+</div>
+<div class="right">
+<a href="javascript:login();" id="_ctl0__ctl0_cphFooter_LoginBottomLink" title="">Click here to Login | </a>
+<a id="_ctl0__ctl0_cphFooter_ContactBottomLink" onclick="javascript:OpenDialog('FAQAndContact.aspx?', 'Contact us');" title="Contact us">
+			Contact us | 
+		</a>
+<a id="_ctl0__ctl0_cphFooter_SiteMapBottomLink" onclick="openSiteMap();" title="Site Map">
+			Site Map | 
+		</a>
+<a href="/Content/themes/OECD/static/help/WBOS User Guide (EN).PDF" id="_ctl0__ctl0_cphFooter_UserGuideBottomLink" target="_blank" title="User Guide">
+			User Guide | 
+		</a>
+</div>
+</div>
+</div>
+</div>
+</form>
+<script src="js/metadata.js" type="text/javascript"></script>
+<script src="js/default.js?v2" type="text/javascript"></script>
+<script src="js/ajax.js" type="text/javascript"></script>
+<script src="js/mergequeries.js?v2" type="text/javascript"></script>
+<script src="js/dialog.js?v2" type="text/javascript"></script>
+</body>
+</html>
