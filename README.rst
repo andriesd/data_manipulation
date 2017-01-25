@@ -7,5 +7,5 @@ Sample Python Scripts for SI 601 from Fall 2015
     - Webscraping with BeautifulSoup
     - Extracting, loading and transforming CSV data
 
-Sample R and R Markdown scripts for SI 618 from Fall 2015
+**Sample R and R Markdown scripts for SI 618 from Fall 2015**
  
