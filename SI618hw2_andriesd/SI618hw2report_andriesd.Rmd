@@ -1,0 +1,73 @@
+---
+title: "SI618hw2report_andriesd"
+output: html_document
+---
+## Loading and Cleaning Data
+
+```{r, echo=FALSE}
+library(ggplot2)
+load.data = read.csv("businessdata_andriesd.tsv", header = TRUE, sep="\t")
+data = na.omit(load.data)
+head(data, 10)
+```
+
+## Histograms of Star Ratings
+
+```{r, echo=FALSE, fig.width= 16}
+qplot(stars, data=data, facets= .~ state, geom= "histogram", binwidth=0.5, fill=state, alpha=I(1/2), main="Histograms of Star Ratings", xlab="Stars")
+qplot(stars, ..density.., data=data, facets= .~ state, geom= "histogram", binwidth=0.5, fill=state, alpha=I(1/2), main="Histograms of Star Ratings", xlab="Stars")
+```
+
+## Histograms of Review Counts
+
+```{r, echo=FALSE,  fig.width=7}
+qplot(review_count, data=data, geom="histogram", binwidth=100, alpha=I(1/2), main="Histograms of Review Counts")
+qplot(review_count, ..density.., data=subset(data, review_count <= 500), geom="histogram", binwidth=2, ylim=c(0, 0.15), alpha=I(1/2), main="Histograms of Review Counts (Filtered)", xlab="Review Counts") + geom_density()
+```
+
+## Boxplot of Star Ratings by States
+
+```{r, echo=FALSE, fig.width=7}
+qplot(state, stars, data=data, geom="boxplot", fill=state, alpha=I(1/2), color=state, main="Star Ratings by States", xlab="", ylab="Stars")
+```
+
+## Jittered Plot of Star Ratings by States
+
+```{r, echo=FALSE, fig.width=7}
+qplot(state, stars, data=data, geom="jitter", fill=state, alpha=I(1/2), color=state, main="Star Ratings by States", xlab="", ylab="Stars")
+```
+
+## Bar Chart of Number of Businesses by State
+
+```{r, echo=FALSE, fig.width=7}
+qplot(reorder(state, state, function(x) -length(x)), data=data, geom="bar", alpha=I(5/6))
+```
+
+## Jittered Scatterplot of Stars and Review Counts
+
+```{r, echo=FALSE, fig.width=7}
+qplot(stars, review_count, data=data, geom="jitter", alpha=I(1/2), color=state)
+```
+
+# Slice and Dice Data with plyr
+## Subsetting Data
+```{r, echo=FALSE}
+library(plyr)
+business.ranking <-data[c("city","name", "main_category", "stars")]
+business.ranking <- ddply(business.ranking, c("city", "main_category"), transform, rank = rank(-stars, ties.method="first"))
+top.five <- business.ranking[business.ranking$rank <= 5,]
+china.cuisine <- top.five[top.five$main_category == "Chinese",]
+attach(china.cuisine)
+sorted.restaurants <- china.cuisine[order(city, rank, na.last=NA),]
+detach(china.cuisine)
+final <- sorted.restaurants[,c(1,2,5)]
+print(final) 
+```
+
+## Summarize Data
+
+```{r, echo=FALSE, fig.width=7}
+library(plyr)
+reviews <- ddply(data, c("state"), summarise, mean_reviews = mean(review_count))
+qplot(reorder(state, mean_reviews, function(x) -x), data=reviews, geom="bar", weight=mean_reviews, alpha=I(5/6)) + scale_y_continuous("Mean Review Counts")
+```
