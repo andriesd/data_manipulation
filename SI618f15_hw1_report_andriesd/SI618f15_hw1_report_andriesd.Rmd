@@ -1,0 +1,42 @@
+---
+title: "SI618f15_hw1_report_andriesd.rmd" 
+output: html_document
+---
+## Step 1: Load Data
+First, the provided TSV data file is loaded into R using the **read.table()** function. Here are the first 15 rows of the data frame:
+
+```{r, echo=FALSE}
+library(ggplot2)
+data = read.table("~/Desktop/SI601_618/SI618/Week1/countrydata_withregion.tsv", header=TRUE, sep="\t", quote = "", fill=TRUE)
+head(data, 15)
+```
+
+## Step 2: Scatter plot of log transformed data
+Natural logarithms of the area and the population of each country are computed and used to produce the following scatter plot using the **qplot()** function.
+
+```{r, echo=FALSE}
+qplot(log(data$area), log(data$population), xlab ="log(area)", ylab = "log(population)")
+```
+
+## Step 3: Data aggregation by region
+The areas and populations of all countries in a region are summed up using the **aggregate()** function, respectively. Then the following two pie charts are created using the **pie()** function.
+
+```{r, echo=FALSE}
+data.agg.area = aggregate(data$area, by=list(data$region), FUN=sum)
+pie(data.agg.area$x, labels=data.agg.area$Group.1, main = "Area of regions")
+#solution to 'integer overflow' for population data found on talkstats.com
+data.agg.pop = aggregate(data$population, by=list(data$region), FUN = function(x){sum(as.numeric(x))}) 
+pie(data.agg.pop$x, labels=data.agg.pop$Group.1, main = "Population of regions")
+```
+
+## Step 4: Visualization of Population per Square Kilometer by Regions
+A new data frame is created to contain the population per sq km of each region using the **data.frame()** function. The data frame is then sorted by population per sq km in decreasing order with the help of the **order()** function. Finally, the following bar plot is created using the **qplot()** function with **geom=“bar”**.
+
+```{r, echo=FALSE}
+data.new = data.frame(region=data.agg.area$Group.1, pop.by.sq.km=(data.agg.pop$x/data.agg.area$x))
+#data.new$pop.by.sq.km[order(data.new$pop.by.sq.km, decreasing=TRUE)]
+attach(data.new)
+sorted.data = data.new[order(-pop.by.sq.km),]
+detach(data.new)
+qplot(data.new$region, data.new$pop.by.sq.km, geom="bar", stat="identity", xlab="Region", ylab="Population per sq km of regions") + theme(axis.text.x = element_text(angle = 60, hjust = 1))
+```
