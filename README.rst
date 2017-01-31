@@ -8,4 +8,6 @@ Sample Python Scripts for SI 601 from Fall 2015
     - Extracting, loading and transforming CSV data
 
 **Sample R and Python scripts for SI 618 from Fall 2015**
+    - Includes visualizations with ggplot2
+    - data manipulation with plyr
  
