@@ -1,0 +1,53 @@
+---
+title: "si618hw3report_andriesd"
+output: html_document
+---
+
+## Getting Data from SQLite Database
+```{r, echo=FALSE}
+library(DBI)
+library(RSQLite)
+library(ggplot2)
+driver<-dbDriver("SQLite")
+connect<-dbConnect(driver, dbname = "vehicles.db")
+Vtable = dbGetQuery(connect, "select * from vehicles")
+head(Vtable, 10)
+summary(Vtable)
+```
+
+## Converting to Factors
+```{r, echo=FALSE}
+Make = factor(Vtable$Make)
+VClass = factor(Vtable$VClass)
+Cylinders = factor(Vtable$Cylinders)
+Trany = factor(Vtable$Trany)
+vehicles = data.frame(Vtable[1], Make, Vtable[3], VClass, Cylinders, Vtable[6], Trany, Vtable[8:10])
+summary(vehicles)
+```
+
+## Filter Down Data
+```{r, echo=FALSE}
+library(plyr)
+vclass <- data.frame(summary(vehicles$VClass))
+newVClass <- subset(vclass, vclass$summary.vehicles.VClass > 40)
+newVehicles = (subset(vehicles, VClass %in% row.names(newVClass)))
+summary(newVehicles)
+```
+
+## Fuel Economy of Vehicles of Different Makes
+```{r, echo=FALSE, fig.width=16}
+for(i in unique(newVehicles$VClass)) {
+
+  VClass.iteration = subset(newVehicles, newVehicles$VClass == i)
+  newVehicles.plus = ddply(VClass.iteration, c("Make","Year"), summarise, mean.by.year=mean(Comb08))
+  
+  ggobj = ggplot(newVehicles.plus, aes(x=Year, y=mean.by.year, group=Make)) + geom_line(aes(colour=Make)) + ggtitle(i) + guides(col=guide_legend(ncol=2)) + labs(x="Year", y="Mean Combined MPG", colour="make") 
+  print(ggobj)
+
+  newVehicles.plus2 = ddply(VClass.iteration, c("Make"), summarise, mean.by.make=mean(Comb08))
+
+  ggobj2 = ggplot(newVehicles.plus2, aes(x=reorder(Make, -mean.by.make), y=mean.by.make)) + geom_bar(stat="identity", alpha=I(5/6)) + ggtitle(i) + labs(x="Make", y="Mean Combined MPG in All Years") + theme(axis.text.x = element_text(angle = 90, hjust = 1))
+  print(ggobj2)
+}
+```
+
